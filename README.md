@@ -16,8 +16,6 @@ Please check the test: https://github.com/testmeifyoucan/schreder/blob/master/sc
 
 And example: https://github.com/testmeifyoucan/schreder/tree/master/example
 
-Also there is an article that describes how and when to use it: http://elgris.github.io/blog/1_schreder/
-
 ## Advantages of such framework
 
 - API tests and documentation with examples from the same box.
