@@ -1,0 +1,265 @@
+swagger: "2.0"
+basePath: /
+host: testapi.my
+info:
+  description: Our very little example API with 2 endpoints
+  title: Example API
+  version: "0.1"
+consumes:
+- application/json
+produces:
+- application/json
+schemes:
+- http
+
+definitions:
+  User:
+    additionalProperties: false
+    properties:
+      avatar_url:
+        type: string
+      bio:
+        type: string
+      blog:
+        type: string
+      company:
+        type: string
+      created_at:
+        format: date-time
+        type: string
+      email:
+        type: string
+      events_url:
+        type: string
+      followers:
+        type: integer
+      followers_url:
+        type: string
+      following:
+        type: integer
+      following_url:
+        type: string
+      gists_url:
+        type: string
+      gravatar_id:
+        type: string
+      hireable:
+        type: boolean
+      html_url:
+        type: string
+      id:
+        type: integer
+      location:
+        type: string
+      login:
+        type: string
+      name:
+        type: string
+      organizations_url:
+        type: string
+      public_repos:
+        type: integer
+      received_events_url:
+        type: string
+      repos_url:
+        type: string
+      site_admin:
+        type: boolean
+      starred_url:
+        type: string
+      subscriptions_url:
+        type: string
+      type:
+        type: string
+      updated_at:
+        format: date-time
+        type: string
+      url:
+        type: string
+    type: object
+
+paths:
+  /hello:
+    get:
+      responses:
+        "200":
+          description: Successful greeting of the world
+          examples:
+            application/json: Hello World!
+          schema:
+            type: string
+      summary: Successful greeting of the world
+  /user:
+    post:
+      parameters:
+      - default: application/json
+        in: header
+        name: Content-Type
+        type: string
+      - description: |-
+          {
+            "login": "octocat",
+            "url": "https://api.github.com/users/octocat",
+            "name": "monalisa octocat",
+            "location": "San Francisco",
+            "public_repos": 2,
+            "followers": 20,
+            "html_url": "https://github.com/octocat",
+            "type": "User",
+            "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+            "followers_url": "https://api.github.com/users/octocat/followers",
+            "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+            "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+            "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+            "organizations_url": "https://api.github.com/users/octocat/orgs",
+            "repos_url": "https://api.github.com/users/octocat/repos",
+            "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+            "received_events_url": "https://api.github.com/users/octocat/received_events"
+          }
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "201":
+          description: User created successfully
+          examples:
+            application/json:
+              events_url: https://api.github.com/users/octocat/events{/privacy}
+              followers: 20
+              followers_url: https://api.github.com/users/octocat/followers
+              following_url: https://api.github.com/users/octocat/following{/other_user}
+              gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+              html_url: https://github.com/octocat
+              location: San Francisco
+              login: octocat
+              name: monalisa octocat
+              organizations_url: https://api.github.com/users/octocat/orgs
+              public_repos: 2
+              received_events_url: https://api.github.com/users/octocat/received_events
+              repos_url: https://api.github.com/users/octocat/repos
+              starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+              subscriptions_url: https://api.github.com/users/octocat/subscriptions
+              type: User
+              url: https://api.github.com/users/octocat
+          schema:
+            $ref: '#/definitions/User'
+      summary: User created successfully
+  /user/{username}:
+    delete:
+      parameters:
+      - default: octocat
+        in: path
+        name: username
+        required: true
+        type: string
+      responses:
+        "204":
+          description: User deleted successfully
+        "404":
+          description: User not found
+          examples:
+            application/json: user someveryunknown not found
+          schema:
+            type: string
+        "500":
+          description: User caused error
+          examples:
+            application/json: BadGuy failed me :(
+          schema:
+            type: string
+      summary: User deleted successfully
+    get:
+      parameters:
+      - default: application/json
+        in: header
+        name: Content-Type
+        type: string
+      - default: octocat
+        in: path
+        name: username
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Successful getting of user details
+          examples:
+            application/json:
+              events_url: https://api.github.com/users/octocat/events{/privacy}
+              followers: 20
+              followers_url: https://api.github.com/users/octocat/followers
+              following_url: https://api.github.com/users/octocat/following{/other_user}
+              gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+              html_url: https://github.com/octocat
+              location: San Francisco
+              login: octocat
+              name: monalisa octocat
+              organizations_url: https://api.github.com/users/octocat/orgs
+              public_repos: 2
+              received_events_url: https://api.github.com/users/octocat/received_events
+              repos_url: https://api.github.com/users/octocat/repos
+              starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+              subscriptions_url: https://api.github.com/users/octocat/subscriptions
+              type: User
+              url: https://api.github.com/users/octocat
+          schema:
+            $ref: '#/definitions/User'
+        "404":
+          description: 404 error in case user not found
+          examples:
+            application/json: user someveryunknown not found
+          schema:
+            type: string
+        "500":
+          description: 500 error in case something bad happens
+          examples:
+            application/json: BadGuy failed me :(
+          schema:
+            type: string
+      summary: Successful getting of user details
+    patch:
+      parameters:
+      - default: application/json
+        in: header
+        name: Content-Type
+        type: string
+      - default: octocat
+        in: path
+        name: username
+        required: true
+        type: string
+      - description: |-
+          {
+            "name": "I Am Updated!"
+          }
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/User'
+      responses:
+        "200":
+          description: User updated successfully
+          examples:
+            application/json:
+              events_url: https://api.github.com/users/octocat/events{/privacy}
+              followers: 20
+              followers_url: https://api.github.com/users/octocat/followers
+              following_url: https://api.github.com/users/octocat/following{/other_user}
+              gists_url: https://api.github.com/users/octocat/gists{/gist_id}
+              html_url: https://github.com/octocat
+              location: San Francisco
+              login: octocat
+              name: I Am Updated!
+              organizations_url: https://api.github.com/users/octocat/orgs
+              public_repos: 2
+              received_events_url: https://api.github.com/users/octocat/received_events
+              repos_url: https://api.github.com/users/octocat/repos
+              starred_url: https://api.github.com/users/octocat/starred{/owner}{/repo}
+              subscriptions_url: https://api.github.com/users/octocat/subscriptions
+              type: User
+              url: https://api.github.com/users/octocat
+          schema:
+            $ref: '#/definitions/User'
+      summary: User updated successfully

@@ -1,0 +1,459 @@
+title: Example API
+version: "0.1"
+baseUri: http://testapi.my/
+protocols:
+- HTTP
+- HTTPS
+mediaType: application/json
+/hello:
+  get:
+    description: Successful greeting of the world
+    responses:
+      200:
+        description: Successful greeting of the world
+        body:
+          schema: |-
+            {
+              "type": "string"
+            }
+          example: '"Hello World!"'
+/user:
+  post:
+    description: User created successfully
+    headers:
+      Content-Type:
+        type: string
+        required: false
+        default: application/json
+    responses:
+      201:
+        description: User created successfully
+        body:
+          schema: |-
+            {
+              "$ref": "#/definitions/User",
+              "definitions": {
+                "User": {
+                  "type": "object",
+                  "properties": {
+                    "avatar_url": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "blog": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "events_url": {
+                      "type": "string"
+                    },
+                    "followers": {
+                      "type": "integer"
+                    },
+                    "followers_url": {
+                      "type": "string"
+                    },
+                    "following": {
+                      "type": "integer"
+                    },
+                    "following_url": {
+                      "type": "string"
+                    },
+                    "gists_url": {
+                      "type": "string"
+                    },
+                    "gravatar_id": {
+                      "type": "string"
+                    },
+                    "hireable": {
+                      "type": "boolean"
+                    },
+                    "html_url": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "organizations_url": {
+                      "type": "string"
+                    },
+                    "public_repos": {
+                      "type": "integer"
+                    },
+                    "received_events_url": {
+                      "type": "string"
+                    },
+                    "repos_url": {
+                      "type": "string"
+                    },
+                    "site_admin": {
+                      "type": "boolean"
+                    },
+                    "starred_url": {
+                      "type": "string"
+                    },
+                    "subscriptions_url": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          example: |-
+            {
+              "login": "octocat",
+              "url": "https://api.github.com/users/octocat",
+              "name": "monalisa octocat",
+              "location": "San Francisco",
+              "public_repos": 2,
+              "followers": 20,
+              "html_url": "https://github.com/octocat",
+              "type": "User",
+              "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+              "followers_url": "https://api.github.com/users/octocat/followers",
+              "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+              "organizations_url": "https://api.github.com/users/octocat/orgs",
+              "repos_url": "https://api.github.com/users/octocat/repos",
+              "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/octocat/received_events"
+            }
+/user/{username}:
+  uriParameters:
+    username:
+      type: string
+      required: false
+      default: octocat
+  get:
+    description: 500 error in case something bad happens
+    headers:
+      Content-Type:
+        type: string
+        required: false
+        default: application/json
+    responses:
+      200:
+        description: Successful getting of user details
+        body:
+          schema: |-
+            {
+              "$ref": "#/definitions/User",
+              "definitions": {
+                "User": {
+                  "type": "object",
+                  "properties": {
+                    "avatar_url": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "blog": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "events_url": {
+                      "type": "string"
+                    },
+                    "followers": {
+                      "type": "integer"
+                    },
+                    "followers_url": {
+                      "type": "string"
+                    },
+                    "following": {
+                      "type": "integer"
+                    },
+                    "following_url": {
+                      "type": "string"
+                    },
+                    "gists_url": {
+                      "type": "string"
+                    },
+                    "gravatar_id": {
+                      "type": "string"
+                    },
+                    "hireable": {
+                      "type": "boolean"
+                    },
+                    "html_url": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "organizations_url": {
+                      "type": "string"
+                    },
+                    "public_repos": {
+                      "type": "integer"
+                    },
+                    "received_events_url": {
+                      "type": "string"
+                    },
+                    "repos_url": {
+                      "type": "string"
+                    },
+                    "site_admin": {
+                      "type": "boolean"
+                    },
+                    "starred_url": {
+                      "type": "string"
+                    },
+                    "subscriptions_url": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          example: |-
+            {
+              "login": "octocat",
+              "url": "https://api.github.com/users/octocat",
+              "name": "monalisa octocat",
+              "location": "San Francisco",
+              "public_repos": 2,
+              "followers": 20,
+              "html_url": "https://github.com/octocat",
+              "type": "User",
+              "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+              "followers_url": "https://api.github.com/users/octocat/followers",
+              "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+              "organizations_url": "https://api.github.com/users/octocat/orgs",
+              "repos_url": "https://api.github.com/users/octocat/repos",
+              "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/octocat/received_events"
+            }
+      404:
+        description: 404 error in case user not found
+        body:
+          schema: |-
+            {
+              "type": "string"
+            }
+          example: '"user someveryunknown not found"'
+      500:
+        description: 500 error in case something bad happens
+        body:
+          schema: |-
+            {
+              "type": "string"
+            }
+          example: '"BadGuy failed me :("'
+  delete:
+    description: User caused error
+    responses:
+      204:
+        description: User deleted successfully
+      404:
+        description: User not found
+        body:
+          schema: |-
+            {
+              "type": "string"
+            }
+          example: '"user someveryunknown not found"'
+      500:
+        description: User caused error
+        body:
+          schema: |-
+            {
+              "type": "string"
+            }
+          example: '"BadGuy failed me :("'
+  patch:
+    description: User updated successfully
+    headers:
+      Content-Type:
+        type: string
+        required: false
+        default: application/json
+    responses:
+      200:
+        description: User updated successfully
+        body:
+          schema: |-
+            {
+              "$ref": "#/definitions/User",
+              "definitions": {
+                "User": {
+                  "type": "object",
+                  "properties": {
+                    "avatar_url": {
+                      "type": "string"
+                    },
+                    "bio": {
+                      "type": "string"
+                    },
+                    "blog": {
+                      "type": "string"
+                    },
+                    "company": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "events_url": {
+                      "type": "string"
+                    },
+                    "followers": {
+                      "type": "integer"
+                    },
+                    "followers_url": {
+                      "type": "string"
+                    },
+                    "following": {
+                      "type": "integer"
+                    },
+                    "following_url": {
+                      "type": "string"
+                    },
+                    "gists_url": {
+                      "type": "string"
+                    },
+                    "gravatar_id": {
+                      "type": "string"
+                    },
+                    "hireable": {
+                      "type": "boolean"
+                    },
+                    "html_url": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "integer"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "login": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "organizations_url": {
+                      "type": "string"
+                    },
+                    "public_repos": {
+                      "type": "integer"
+                    },
+                    "received_events_url": {
+                      "type": "string"
+                    },
+                    "repos_url": {
+                      "type": "string"
+                    },
+                    "site_admin": {
+                      "type": "boolean"
+                    },
+                    "starred_url": {
+                      "type": "string"
+                    },
+                    "subscriptions_url": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "updated_at": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          example: |-
+            {
+              "login": "octocat",
+              "url": "https://api.github.com/users/octocat",
+              "name": "I Am Updated!",
+              "location": "San Francisco",
+              "public_repos": 2,
+              "followers": 20,
+              "html_url": "https://github.com/octocat",
+              "type": "User",
+              "following_url": "https://api.github.com/users/octocat/following{/other_user}",
+              "followers_url": "https://api.github.com/users/octocat/followers",
+              "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
+              "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
+              "organizations_url": "https://api.github.com/users/octocat/orgs",
+              "repos_url": "https://api.github.com/users/octocat/repos",
+              "events_url": "https://api.github.com/users/octocat/events{/privacy}",
+              "received_events_url": "https://api.github.com/users/octocat/received_events"
+            }

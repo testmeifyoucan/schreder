@@ -1,0 +1,24 @@
+package: github.com/testmeifyoucan/schreder
+import:
+- package: github.com/alecthomas/jsonschema
+- package: github.com/elgris/jsondiff
+- package: github.com/ghodss/yaml
+- package: github.com/go-openapi/spec
+- package: github.com/go-raml/raml
+- package: github.com/jingweno/go-sawyer
+  subpackages:
+  - hypermedia
+- package: github.com/labstack/echo
+  subpackages:
+  - middleware
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert
+- package: gopkg.in/yaml.v2
+testImport:
+- package: github.com/go-openapi/loads
+  subpackages:
+  - fmts
+- package: github.com/go-openapi/strfmt
+- package: github.com/go-openapi/validate
+- package: github.com/jarcoal/httpmock
