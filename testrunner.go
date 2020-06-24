@@ -86,7 +86,7 @@ func (r *httpRunner) Run(t *testing.T, tests ...Test) {
 
 		// run test
 		for caseIndex, testCase := range test.TestCases() {
-			t.Logf("running test '%s'(%s), case %d", testName, test.Description(), caseIndex)
+			t.Logf("running test '%s'(%s), case %d", testName, testCase.Description, caseIndex+1)
 			r.runTest(t, testCase, test.Method(), test.Path())
 		}
 
